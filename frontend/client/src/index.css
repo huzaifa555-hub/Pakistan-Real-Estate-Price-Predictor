@@ -1,0 +1,19 @@
+/* Quiet Civic Modernism: paper-white canvas, editorial serif/display type, mineral blue interaction cues, emerald health signals. */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root { --background: #f4f7f8; --foreground: #14232d; --ink-muted: #647580; --line: #dce5e8; --mineral: #4f7c96; --mineral-dark: #31586e; --emerald: #16836d; --coral: #c75d52; --paper: #ffffff; --ease-out: cubic-bezier(0.23, 1, 0.32, 1); }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: 'Manrope', sans-serif; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button:active { transform: scale(.975); }
+::selection { background: #cce0e8; color: var(--foreground); }
+.paper-noise { background-image: radial-gradient(rgba(20,35,45,.04) .6px, transparent .6px); background-size: 9px 9px; }
+.hero-wash { background: radial-gradient(circle at 10% 10%, rgba(218,232,237,.9), transparent 36%), radial-gradient(circle at 92% 42%, rgba(221,237,231,.55), transparent 32%); }
+.display { font-family: 'DM Serif Display', serif; letter-spacing: -.035em; }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 900ms linear infinite; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
