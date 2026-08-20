@@ -1,105 +1,101 @@
-The **Real Estate Rental Price Prediction System** is an end-to-end Machine Learning solution engineered to estimate residential rental rates across major Pakistani urban centers (Lahore, Karachi, Islamabad, Rawalpindi, Faisalabad).
+<div align="center">
 
-In-market listings scraped from Zameen.com undergo regex-based price normalization, geospatial keyword parsing, amenities signal mining, non-linear outlier bounds filtering, and categorical One-Hot Encoding. The feature matrix feeds into an **Extreme Gradient Boosting (XGBoost) Regressor**. The pipeline is serialized into binary artifacts and served via a **Flask RESTful API**, delivering real-time inferences to a **Next.js** TypeScript dashboard styled with Tailwind CSS.
+# 🏡 Pakistan Real Estate Price Prediction System
+
+An end-to-end Machine Learning ecosystem engineered to evaluate and predict residential rental prices across major metropolitan cities in Pakistan using XGBoost, Flask, and Next.js.
+
+[![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![XGBoost](https://img.shields.io/badge/XGBoost-v3.4-EC2227?style=for-the-badge&logo=xgboost&logoColor=white)](https://xgboost.ai)
+[![Flask](https://img.shields.io/badge/Flask-v3.1-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![Next.js](https://img.shields.io/badge/Next.js-v14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
 ---
 
-## 🎓 Academic Administration & Development Team
+### 🎓 Academic Capstone Project (FYP)
+**Institute of Mathematics and Computer Science (IMCS)**  
+**University of Sindh, Jamshoro**
 
-### **Academic Entity**
-* **Department:** Institute of Mathematics and Computer Science (IMCS)
-* **University:** University of Sindh, Jamshoro, Sindh, Pakistan
-* **Program:** Bachelor of Science in Computer Science / Software Engineering
-* **Batch:** 2K23
+</div>
 
-### **Supervision**
+---
+
+## 📌 Executive Summary
+
+Real estate markets across Pakistan suffer from severe information asymmetry, inconsistent valuation metrics, and broker manipulation. This project solves that problem by building a data-driven valuation engine.
+
+By processing raw market listings scraped from Zameen.com, the pipeline cleans currency strings, parses physical parameters, applies non-linear outlier bounds, and trains an **XGBoost Regressor** model. The model serves real-time predictions via a **Flask RESTful API** to an interactive **Next.js** web interface.
+
+---
+
+## 👥 Academic Supervision & Team
+
+### **Project Supervisor**
 * **Prof. Dr. Imtiaz Korejo**  
   *Professor & FYP Supervisor*  
   *Institute of Mathematics and Computer Science (IMCS), University of Sindh, Jamshoro*
 
-### **Development Roster**
-| Student Name | Roll Number | Primary Contributions |
+### **Development Team**
+| Student Name | Roll Number | Primary Core Responsibilities |
 | :--- | :--- | :--- |
-| **Hafiz Huzaifa** | `2K23/CSE/54` | **Group Leader** — Architecture, Model Pipeline, Backend API & System Integration |
-| **Satiyam** | `2K23/CSE/131` | Data Preprocessing, Regex Standardization & Feature Engineering |
-| **Lukus** | `2K23/CSE/72` | Frontend UI/UX Engineering, Dashboard Integration & Documentation |
+| **Hafiz Huzaifa** | `2K23/CSE/54` | **Team Lead** — System Architecture, ML Pipeline, Backend REST API & Integration |
+| **Satiyam** | `2K23/CSE/131` | Data Engineering, Regex Normalization & Feature Pipeline |
+| **Lukus** | `2K23/CSE/72` | UI/UX Development, Next.js Dashboard & Documentation |
 
 ---
 
-## 🏛 System Architecture & Execution Pipeline
-
-The application adheres to a modular three-tier architecture separating data transformation, backend orchestration, and user client interaction.
-
-+-----------------------------------------------------------------------------------+
-|                                 1. DATA ENGINE                                    |
-|  [zameen_rentals_data.csv] ---> Regex Parsing & Imputation ---> Outlier Scrubbing  |
-|                                                                 |                 |
-|                                                                 v                 |
-|  [model.pkl] <--- Serialization <--- Model Training <--- Feature Matrix (X, y)   |
-|  [feature_columns.pkl]                                                            |
-+-----------------------------------------------------------------------------------+
-|
-v
-+-----------------------------------------------------------------------------------+
-|                               2. BACKEND API SERVICE                              |
-|  Flask Application (app.py) running on http://127.0.0.1:5000                      |
-|  - CORS Middleware Routing                                                        |
-|  - Reindexing Guard for Categorical Encodings                                     |
-|  - Inference Dispatcher                                                           |
-+-----------------------------------------------------------------------------------+
-^
-| HTTP POST (JSON Payload)
-v
-+-----------------------------------------------------------------------------------+
-|                               3. FRONTEND CLIENT UI                               |
-|  Next.js 14 App Router running on http://localhost:3000                           |
-|  - Input Validation Controls (City, Size, Amenities)                              |
-|  - Asynchronous Valuation Renderer                                                |
-+-----------------------------------------------------------------------------------+
-
----
-
-## 🛠 Tech Stack Specifications
-
-* **Language Engines:** Python `v3.14.0` (Virtual Environment via `venv`), Node.js `v20.x`
-* **Data & Analytics Engine:** `pandas` (`v3.0.5`), `numpy` (`v2.5.2`)
-* **Machine Learning Framework:** `scikit-learn` (`v1.9.0`), `xgboost` (`v3.4.1`)
-* **Backend Framework:** `flask` (`v3.1.3`), `flask-cors` (`v6.0.5`), `pickle` (StdLib)
-* **Frontend Application:** Next.js (App Router), TypeScript (`.tsx`), Tailwind CSS
-
----
-
-## 📁 Repository Structure
+## ⚡ System Architecture
 
 ```text
-Real Estate Price Prediction System Using ML/
+┌─────────────────────────────────────────────────────────────────────────┐
+│                           1. DATA PIPELINE                              │
+│  Zameen Dataset ➔ Regex Price Normalization ➔ Spatial Keyword Extraction │
+│  ➔ Outlier Sanitization ➔ One-Hot Matrix Encoding ➔ Train XGBoost       │
+└──────────────────────────────────┬──────────────────────────────────────┘
+                                   │
+                                   ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       2. BACKEND API SERVICE                            │
+│  Flask REST API ([http://127.0.0.1:5000](http://127.0.0.1:5000))                                 │
+│  - Endpoint: POST /api/predict                                          │
+│  - Feature Reindexing Guard (feature_columns.pkl)                       │
+│  - Real-time Model Inference (model.pkl)                                │
+└──────────────────────────────────▲──────────────────────────────────────┘
+                                   │
+                                   │ JSON Payload
+                                   ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         3. FRONTEND DASHBOARD                           │
+│  Next.js + TypeScript + Tailwind CSS Interface                          │
+│  - Input Parameters: City, Size (Marla), Beds, Baths, Furnishing        │
+│  - Real-time Price Estimation UI Component                              │
+└─────────────────────────────────────────────────────────────────────────┘
+
+
+🛠 Tech Stack
+
+ML & Analytics: Python 3.14, pandas, numpy, scikit-learn, xgboost
+
+Backend API: Flask, flask-cors, pickle
+
+Frontend UI: Next.js (App Router), TypeScript, Tailwind CSS, Lucide React
+
+Environment & Tools: pnpm, venv, Git, VS Code
+
+📁 Project Structure
+
 ├── data/
-│   └── zameen_rentals_data.csv       # Raw listing dataset (Source: Zameen.com)
+│   └── zameen_rentals_data.csv       # Raw listing dataset
 ├── backend/
-│   ├── venv/                         # Isolated Python Virtual Environment
-│   ├── check_env.py                  # Environment sanity checker
-│   ├── train_model.py                # Preprocessing, feature extraction & training script
-│   ├── app.py                        # Flask RESTful API server entry point
-│   ├── model.pkl                     # Trained binary XGBoost model object
-│   └── feature_columns.pkl           # Column header schema snapshot
-├── frontend/                         # Next.js web application root
-│   ├── app/
-│   │   ├── page.tsx                  # Interactive prediction form UI
-│   │   ├── layout.tsx                # Base HTML wrapper
-│   │   └── globals.css               # Tailwind directives
-│   ├── package.json                  # Node dependencies and scripts
-│   ├── tsconfig.json                 # TypeScript strict compiler rules
-│   └── tailwind.config.js            # Tailwind layout parameters
+│   ├── venv/                         # Python Virtual Environment
+│   ├── train_model.py                # Data processing & model training script
+│   ├── app.py                        # Flask API server
+│   ├── model.pkl                     # Saved XGBoost model artifact
+│   └── feature_columns.pkl           # Saved feature matrix schema
+├── frontend/                         # Next.js Application Root
+│   ├── app/                          # Next.js App Router
+│   ├── package.json                  # Node dependencies
+│   └── tailwind.config.js            # Tailwind configuration
 ├── .gitignore                        # Git exclusion rules
-└── README.md                         # Technical documentation
+└── README.md                         # Project documentation
 
-📜 Project Metadata & Usage Policy
-Department: Institute of Mathematics and Computer Science (IMCS)
-
-Institution: University of Sindh, Jamshoro
-
-Term: Final Year Project (FYP) 2026
-
-Data Source: Zameen.com Listings Dataset
-
-License: Open Academic License (Restricted to Educational & Evaluation Purposes)
