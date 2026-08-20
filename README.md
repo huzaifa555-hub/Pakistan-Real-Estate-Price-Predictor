@@ -40,7 +40,7 @@ By processing raw market listings scraped from Zameen.com, the pipeline cleans c
 | :--- | :--- | :--- |
 | **Hafiz Huzaifa** | `2K23/CSE/54` | **Team Lead** — System Architecture, ML Pipeline, Backend REST API & Integration |
 | **Satiyam** | `2K23/CSE/131` | Data Engineering, Regex Normalization & Feature Pipeline |
-| **Lukus** | `2K23/CSE/72` | UI/UX Development, Next.js Dashboard & Documentation |
+
 
 ---
 
